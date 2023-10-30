@@ -21,7 +21,7 @@ void pqenqueue(int value ,int prio){
     }else{
         sl=NULL;
         search=front;
-        while(temp->prio > search->prio && search != NULL){
+        while(search != NULL && temp->prio > search->prio){
             sl=search;
             search=search->next;
         }
@@ -41,28 +41,30 @@ void dequeue(){
     if(rear==0 && front==0){
         printf("\nEmpty");
         return;
-    }else if(rear == front){
-        rear=front=NULL;
-        free(temp);
-    }else{
+    }
+    // else if(rear == front){
+    //     rear=front=NULL;
+    //     free(temp);
+    // }
+    else{
         front=front->next;
-        rear->next=front;
         free(temp);
     }
 }
 void display(){
     pq *temp;
-    temp=rear;
+    temp=front;
      if(rear==0 && front==0){
         printf("\nEmpty");
         return;
      }
      else{
-         do{
+         //Do-while still not working 
+         while(temp != rear){
              printf("%d->",temp->data);
              temp=temp->next;
-         }while(temp != front);
-         
+         }
+        printf("%d->",temp->data);
      }
 }
 void main(){
